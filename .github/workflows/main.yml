@@ -45,5 +45,7 @@ jobs:
             whoami
             cd ${{ secrets.REMOTE_TARGET }}
             ls -a
+            export NVM_DIR=~/.nvm
+            source ~/.nvm/nvm.sh
             npm run stop
             npm run start
