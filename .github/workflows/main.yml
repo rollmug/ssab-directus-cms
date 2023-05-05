@@ -9,7 +9,7 @@ on:
         description: 'App version'
         required: false
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - 
@@ -30,6 +30,10 @@ jobs:
       -
         name: Deploy with rsync
         run: rsync -avz ./ ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:${{ secrets.REMOTE_TARGET }}
+  launch:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
       - 
         name: Post Deploy
         uses: appleboy/ssh-action@v0.1.10
@@ -41,24 +45,5 @@ jobs:
             whoami
             cd ${{ secrets.REMOTE_TARGET }}
             ls -a
-            
-
-      # - 
-      #   name: Deploy to Server
-      #   uses: easingthemes/ssh-deploy@main
-      #   env:
-      #     SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-      #     REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
-      #     REMOTE_USER: ${{ secrets.REMOTE_USER }}
-      #     TARGET: ${{ secrets.REMOTE_TARGET }}
-      #     SCRIPT_BEFORE: |
-      #       whoami
-      #       ls -al
-      #     SCRIPT_AFTER: |
-      #       whoami
-      #       ls -al
-      #       echo $RSYNC_STDOUT
-      #       npm run stop
-      #       npm run start
-      
-      
+            npm run stop
+            npm run start
