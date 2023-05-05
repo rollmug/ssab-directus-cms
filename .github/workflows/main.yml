@@ -23,7 +23,9 @@ jobs:
             cd ${{ secrets.REMOTE_TARGET }}
             git pull
             touch .env
-            cat << EOF > .env ${{ secrets.ENV_FILE }} EOF
+            cat << EOF > .env 
+            ${{ secrets.ENV_FILE }} 
+            EOF
             export NVM_DIR=~/.nvm
             source ~/.nvm/nvm.sh
             # npm run stop
