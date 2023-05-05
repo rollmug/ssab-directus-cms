@@ -31,7 +31,7 @@ jobs:
         name: Deploy with rsync
         run: rsync -avz ./ ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:${{ secrets.REMOTE_TARGET }}
   launch:
-    needs: build
+    needs: deploy
     runs-on: ubuntu-latest
     steps:
       - 
