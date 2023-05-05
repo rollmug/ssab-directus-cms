@@ -45,6 +45,9 @@ jobs:
             whoami
             cd ${{ secrets.REMOTE_TARGET }}
             ls -a
+            touch .env
+            truncate -s 0 .env
+            echo ${{ secrets.ENV_FILE }} >> .env
             export NVM_DIR=~/.nvm
             source ~/.nvm/nvm.sh
             npm run stop
