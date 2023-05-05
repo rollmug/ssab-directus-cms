@@ -9,46 +9,22 @@ on:
         description: 'App version'
         required: false
 jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - 
-        name: Checkout
-        uses: actions/checkout@v3
-      - 
-        name: Install npm dependencies
-        run: npm install
-      - 
-        name: Install SSH Key
-        uses: shimataro/ssh-key-action@v2
-        with:
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          known_hosts: 'placeholder'
-      - 
-        name: Adding Known Hosts
-        run: ssh-keyscan -H ${{ secrets.REMOTE_HOST }} >> ~/.ssh/known_hosts
-      -
-        name: Deploy with rsync
-        run: rsync -avz ./ ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:${{ secrets.REMOTE_TARGET }}
   launch:
-    needs: deploy
     runs-on: ubuntu-latest
     steps:
       - 
-        name: Post Deploy
+        name: Pull Latest
         uses: appleboy/ssh-action@v0.1.10
         with:
           host: ${{ secrets.REMOTE_HOST }}
           username: ${{ secrets.REMOTE_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            whoami
             cd ${{ secrets.REMOTE_TARGET }}
-            ls -a
+            git pull
             touch .env
-            truncate -s 0 .env
-            echo ${{ secrets.ENV_FILE }} >> .env
+            cat << EOF > .env ${{ secrets.ENV_FILE }} EOF
             export NVM_DIR=~/.nvm
             source ~/.nvm/nvm.sh
-            npm run stop
-            npm run start
+            # npm run stop
+            # npm run start
