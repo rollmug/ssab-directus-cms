@@ -1,8 +1,13 @@
 name: deploy-remote
 on:
-  push:
-    branches:
-      - "main"
+  # push:
+  #   branches:
+  #     - "main"
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'App version'
+        required: false
 jobs:
   deploy:
     runs-on: ubuntu-latest
