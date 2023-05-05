@@ -18,22 +18,46 @@ jobs:
       - 
         name: Install npm dependencies
         run: npm install
+      # - 
+      #   name: Install SSH Key
+      #   uses: shimataro/ssh-key-action@v2
+      #   with:
+      #     key: {%- raw -%} ${{ secrets.SSH_PRIVATE_KEY }}
+      #     known_hosts: 'placeholder'
+      # - 
+      #   name: Adding Known Hosts
+      #   run: ssh-keyscan -H ${{ secrets.REMOTE_HOST }}{% endraw%} >> ~/.ssh/known_hosts
+      
       - 
         name: Deploy to Server
-        uses: easingthemes/ssh-deploy@main
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY }}
-          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
-          REMOTE_USER: ${{ secrets.REMOTE_USER }}
-          TARGET: ${{ secrets.REMOTE_TARGET }}
-          SCRIPT_BEFORE: |
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: ${{ secrets.REMOTE_HOST }}
+          username: ${{ secrets.REMOTE_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
             whoami
-            ls -al
-          SCRIPT_AFTER: |
-            whoami
-            ls -al
-            echo $RSYNC_STDOUT
-            npm run stop
-            npm run start
+            cd ${{ secrets.REMOTE_TARGET }}
+            echo "hi dave"
+            pwd
+            ls -a
+
+      # - 
+      #   name: Deploy to Server
+      #   uses: easingthemes/ssh-deploy@main
+      #   env:
+      #     SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+      #     REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+      #     REMOTE_USER: ${{ secrets.REMOTE_USER }}
+      #     TARGET: ${{ secrets.REMOTE_TARGET }}
+      #     SCRIPT_BEFORE: |
+      #       whoami
+      #       ls -al
+      #     SCRIPT_AFTER: |
+      #       whoami
+      #       ls -al
+      #       echo $RSYNC_STDOUT
+      #       npm run stop
+      #       npm run start
       
       
