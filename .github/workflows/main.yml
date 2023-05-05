@@ -38,8 +38,7 @@ jobs:
           script: |
             whoami
             cd ${{ secrets.REMOTE_TARGET }}
-            echo "hi dave"
-            pwd
+            touch test.txt
             ls -a
 
       # - 
