@@ -1,4 +1,4 @@
-name: deploy-remote
+name: deploy-remote-old
 on:
   # push:
   #   branches:
