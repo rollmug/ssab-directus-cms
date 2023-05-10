@@ -47,7 +47,7 @@ services:
 
   directus_ssab:
     container_name: directus_ssab
-    image: directus/directus:latest
+    image: directus/directus:10.0.0
     restart: always
     ports:
       - ${DIRECTUS_PORT}:8055
