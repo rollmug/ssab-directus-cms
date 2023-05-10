@@ -105,21 +105,21 @@ var index = (router, { services, exceptions }) => {
                 delete activeTheme.uiShapes;
                 activeTheme.uiShapes = [];
 
-                if(typeof activeTheme.backgroundImage !== null) {
+                if(activeTheme.backgroundImage !== null) {
                     let bg = activeTheme.backgroundImage;
                     activeTheme.backgroundImage.url = `/assets/${bg.id}/${bg.filename_download}`;
                     delete activeTheme.backgroundImage.id;
                     delete activeTheme.backgroundImage.filename_download;
                 }
 
-                if(typeof activeTheme.hiddenObject !== null) {
+                if(activeTheme.hiddenObject !== null) {
                     let bg = activeTheme.hiddenObject;
                     activeTheme.hiddenObject.url = `/assets/${bg.id}/${bg.filename_download}`;
                     delete activeTheme.hiddenObject.id;
                     delete activeTheme.hiddenObject.filename_download;
                 }
 
-                if(typeof activeTheme.cornerObject !== null) {
+                if(activeTheme.cornerObject !== null) {
                     let bg = activeTheme.cornerObject;
                     activeTheme.cornerObject.url = `/assets/${bg.id}/${bg.filename_download}`;
                     delete activeTheme.cornerObject.id;
