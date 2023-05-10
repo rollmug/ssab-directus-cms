@@ -110,21 +110,21 @@ var index = (router, { services, exceptions }) => {
 
                 if(activeTheme.backgroundImage !== null) {
                     let bg = activeTheme.backgroundImage;
-                    activeTheme.backgroundImage.url = `/assets/${bg.id}/${bg.filename_download}`;
+                    activeTheme.backgroundImage.url = `${urlBase}/assets/${bg.id}/${bg.filename_download}`;
                     delete activeTheme.backgroundImage.id;
                     delete activeTheme.backgroundImage.filename_download;
                 }
 
                 if(activeTheme.hiddenObject !== null) {
                     let bg = activeTheme.hiddenObject;
-                    activeTheme.hiddenObject.url = `/assets/${bg.id}/${bg.filename_download}`;
+                    activeTheme.hiddenObject.url = `${urlBase}/assets/${bg.id}/${bg.filename_download}`;
                     delete activeTheme.hiddenObject.id;
                     delete activeTheme.hiddenObject.filename_download;
                 }
 
                 if(activeTheme.cornerObject !== null) {
                     let bg = activeTheme.cornerObject;
-                    activeTheme.cornerObject.url = `/assets/${bg.id}/${bg.filename_download}`;
+                    activeTheme.cornerObject.url = `${urlBase}/assets/${bg.id}/${bg.filename_download}`;
                     delete activeTheme.cornerObject.id;
                     delete activeTheme.cornerObject.filename_download;
                 }
@@ -134,7 +134,7 @@ var index = (router, { services, exceptions }) => {
                     customLightObjects.forEach(el => {
                         const obj = el.clientLightObjects_id;
                         const id = obj.objectPlacement.id;
-                        activeTheme.lightObjects[id] = `/assets/${obj.lightObjectImage.id}/${obj.lightObjectImage.filename_download}`;
+                        activeTheme.lightObjects[id] = `${urlBase}/assets/${obj.lightObjectImage.id}/${obj.lightObjectImage.filename_download}`;
                     });
                 }
                 
@@ -143,7 +143,7 @@ var index = (router, { services, exceptions }) => {
                     customDecorativeObjects.forEach(el => {
                         const obj = el.clientDecorativeObjects1_id;
                         const id = obj.objectPosition.id;
-                        activeTheme.decorativeObjects[id] = `/assets/${obj.decorativeObjectImage.id}/${obj.decorativeObjectImage.filename_download}`;
+                        activeTheme.decorativeObjects[id] = `${urlBase}/assets/${obj.decorativeObjectImage.id}/${obj.decorativeObjectImage.filename_download}`;
                     });
                 }
 
@@ -152,7 +152,7 @@ var index = (router, { services, exceptions }) => {
                     customTextures.forEach(el => {
                         const obj = el.clientTextures_id;
                         const id = obj.texturePlacement.id;
-                        activeTheme.textures[id] = `/assets/${obj.textureImage.id}/${obj.textureImage.filename_download}`;
+                        activeTheme.textures[id] = `${urlBase}/assets/${obj.textureImage.id}/${obj.textureImage.filename_download}`;
                     });
                 }
 
@@ -161,8 +161,8 @@ var index = (router, { services, exceptions }) => {
                     uiShapes.forEach(obj => {
                         //const id = obj.id;
                         const imgs = {
-                            "image": `/assets/${obj.directus_files_id.id}/${obj.directus_files_id.filename_download}?key=padding`,
-                            "hitImage": `/assets/${obj.directus_files_id.id}/${obj.directus_files_id.filename_download}?key=fatten`
+                            "image": `${urlBase}/assets/${obj.directus_files_id.id}/${obj.directus_files_id.filename_download}?key=padding`,
+                            "hitImage": `${urlBase}/assets/${obj.directus_files_id.id}/${obj.directus_files_id.filename_download}?key=fatten`
                         };
                         activeTheme.uiShapes.push(imgs);
                     });
