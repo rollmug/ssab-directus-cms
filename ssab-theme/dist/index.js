@@ -102,6 +102,9 @@ var index = (router, { services, exceptions }) => {
                 activeTheme.decorativeObjects = {};
                 activeTheme.textures = {};
 
+                delete activeTheme.customLightObjects;
+                delete activeTheme.customDecorativeObjects;
+                delete activeTheme.customTextures;
                 delete activeTheme.uiShapes;
                 activeTheme.uiShapes = [];
 
@@ -133,7 +136,6 @@ var index = (router, { services, exceptions }) => {
                         const id = obj.objectPlacement.id;
                         activeTheme.lightObjects[id] = `/assets/${obj.lightObjectImage.id}/${obj.lightObjectImage.filename_download}`;
                     });
-                    delete activeTheme.customLightObjects;
                 }
                 
                 // decorative objects
@@ -143,7 +145,6 @@ var index = (router, { services, exceptions }) => {
                         const id = obj.objectPosition.id;
                         activeTheme.decorativeObjects[id] = `/assets/${obj.decorativeObjectImage.id}/${obj.decorativeObjectImage.filename_download}`;
                     });
-                    delete activeTheme.customDecorativeObjects;
                 }
 
                 // textures
@@ -153,7 +154,6 @@ var index = (router, { services, exceptions }) => {
                         const id = obj.texturePlacement.id;
                         activeTheme.textures[id] = `/assets/${obj.textureImage.id}/${obj.textureImage.filename_download}`;
                     });
-                    delete activeTheme.customTextures;
                 }
 
                 // ui shapes
