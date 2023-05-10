@@ -5,16 +5,16 @@ var index = (router, { services, exceptions }) => {
 		const { ItemsService } = services;
 		const { ServiceUnavailableException } = exceptions;
 
-		const activeTheme = new ItemsService('activeTheme', { schema: req.schema, accountability: req.accountability });
+		const settings = new ItemsService('directus_settings', { schema: req.schema, accountability: req.accountability });
 
-		activeTheme.readByQuery({ fields: ['*'] }).then((results) => {
-            const themeID = results[0].activeTheme;
+		settings.readByQuery({ fields: ['*'] }).then((results) => {
+            const urlBase = results[0].project_url;
+            let graphURL = new URL("graphql", urlBase);
 
-            fetch("http://localhost:8055/graphql", {
+            fetch(graphURL, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer FFcKkkaIB7WfIWKAtjYobRZQPS_SMtIv'
+                    'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
                     query: `
