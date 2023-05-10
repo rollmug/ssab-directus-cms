@@ -54,6 +54,7 @@ services:
     volumes:
       - ./directus/uploads:/directus/uploads
       - ./snapshots:/directus/snapshots
+      - ./ssab-theme/dist:/directus/extensions/endpoints/ssab-theme
     networks:
       - directus_ssab
     depends_on:
@@ -79,6 +80,7 @@ services:
       ADMIN_PASSWORD: ${ADMIN_PASSWORD}
       CORS_ENABLED: 'true'
       CORS_ORIGIN: 'true'
+      EXTENSIONS_AUTO_RELOAD: 'true'
 
       PUBLIC_URL: ${PUBLIC_URL}
 

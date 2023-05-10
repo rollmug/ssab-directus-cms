@@ -1,8 +1,8 @@
 name: deploy-remote
 on:
-  push:
-    branches:
-      - "main"
+  # push:
+  #   branches:
+  #     - "main"
   workflow_dispatch:
     inputs:
       version:
@@ -28,6 +28,6 @@ jobs:
             EOF
             export NVM_DIR=~/.nvm
             source ~/.nvm/nvm.sh
-            # npm run stop
+            npm run stop
             npm install
-            # npm run start
+            npm run start
