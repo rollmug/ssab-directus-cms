@@ -24,7 +24,7 @@ jobs:
             git pull
             touch .env
             cat << EOF > .env 
-            ${{ secrets.ENV_FILE }} 
+            ${{ secrets.ENV_FILE }}
             EOF
             export NVM_DIR=~/.nvm
             source ~/.nvm/nvm.sh
