@@ -170,8 +170,8 @@ var index = (router, { services, exceptions }) => {
             //const id = obj.id;
             const imgs = {
               "id": obj.directus_files_id.id,
-              "image": `/assets/${obj.directus_files_id.filename_disk}?key=padding`,
-              "hitImage": `/assets/${obj.directus_files_id.id}/${obj.directus_files_id.filename_download}?key=fatten2`
+              "image": `/assets/${obj.directus_files_id.filename_disk}?key=padding20`,
+              "hitImage": `/assets/${obj.directus_files_id.id}/${obj.directus_files_id.filename_download}?key=fatten20`
             };
             activeTheme.uiShapes.push(imgs);
           });
