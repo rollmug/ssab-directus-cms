@@ -47,6 +47,7 @@ var index = (router, { services, exceptions }) => {
                               clientLightObjects_id {
                                 lightObjectImage {
                                   filename_download
+                                  filename_disk
                                   id
                                 }
                                 objectPlacement {
@@ -59,6 +60,7 @@ var index = (router, { services, exceptions }) => {
                               clientDecorativeObjects1_id {
                                 decorativeObjectImage {
                                   filename_download
+                                  filename_disk
                                   id
                                 }
                                 objectPosition {
@@ -71,6 +73,7 @@ var index = (router, { services, exceptions }) => {
                               clientTextures_id {
                                 textureImage {
                                   filename_download
+                                  filename_disk
                                   id
                                 }
                                 texturePlacement {
@@ -148,7 +151,7 @@ var index = (router, { services, exceptions }) => {
           customLightObjects.forEach(el => {
             const obj = el.clientLightObjects_id;
             const id = obj.objectPlacement.id;
-            activeTheme.lightObjects[id] = `${urlBase}/assets/${obj.lightObjectImage.id}/${obj.lightObjectImage.filename_download}`;
+            activeTheme.lightObjects[id] = `${urlBase}/assets/${obj.lightObjectImage.filename_disk}`;
           });
         }
 
@@ -157,7 +160,7 @@ var index = (router, { services, exceptions }) => {
           customDecorativeObjects.forEach(el => {
             const obj = el.clientDecorativeObjects1_id;
             const id = obj.objectPosition.id;
-            activeTheme.decorativeObjects[id] = `${urlBase}/assets/${obj.decorativeObjectImage.id}/${obj.decorativeObjectImage.filename_download}`;
+            activeTheme.decorativeObjects[id] = `${urlBase}/assets/${obj.decorativeObjectImage.filename_disk}`;
           });
         }
 
@@ -166,7 +169,7 @@ var index = (router, { services, exceptions }) => {
           customTextures.forEach(el => {
             const obj = el.clientTextures_id;
             const id = obj.texturePlacement.id;
-            activeTheme.textures[id] = `${urlBase}/assets/${obj.textureImage.id}/${obj.textureImage.filename_download}`;
+            activeTheme.textures[id] = `${urlBase}/assets/${obj.textureImage.filename_disk}`;
           });
         }
 
