@@ -1,6 +1,6 @@
 {
   "name": "ssab-client-cms",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "CMS and database for SSAB",
   "main": "./lib/index.js",
   "type": "module",

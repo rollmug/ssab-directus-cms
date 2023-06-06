@@ -92,7 +92,7 @@ services:
 
   imagemagick:
     container_name: imagemagick
-    image: davekobrenski/imagemagick-node:0.1.6
+    image: davekobrenski/imagemagick-node:arm64-0.1.6
     restart: always
     environment:
       NODE_ENV: production
@@ -118,21 +118,6 @@ services:
       - 4000:4000
     environment:
       API_ENDPOINT: ${API_ENDPOINT}
-    networks:
-      - directus_ssab
-
-  cloudflared:
-    container_name: cloudflared
-    image: cloudflare/cloudflared:latest
-    volumes:
-      - /home/davek/.cloudflared:/etc/.cloudflared
-    depends_on: 
-      - mysql
-    restart: unless-stopped
-    command: tunnel run
-    environment:
-      - TUNNEL_TOKEN=${TUNNEL_TOKEN}
-      - TUNNEL_ORIGIN_CERT=/etc/.cloudflared/cert.pem
     networks:
       - directus_ssab
 
