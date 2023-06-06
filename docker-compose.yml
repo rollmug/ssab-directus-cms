@@ -126,8 +126,6 @@ services:
     image: cloudflare/cloudflared:latest
     volumes:
       - /home/davek/.cloudflared:/etc/.cloudflared
-    depends_on: 
-      - mysql
     restart: unless-stopped
     command: tunnel run
     environment:
