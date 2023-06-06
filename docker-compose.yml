@@ -124,6 +124,8 @@ services:
   cloudflared:
     container_name: cloudflared
     image: cloudflare/cloudflared:latest
+    volumes:
+      - /home/davek/cloudflared:/home/nonroot/.cloudflared/cert.pem
     restart: unless-stopped
     command: tunnel run
     environment:
