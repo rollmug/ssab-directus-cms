@@ -124,13 +124,11 @@ services:
   cloudflared:
     container_name: cloudflared
     image: cloudflare/cloudflared:latest
-    volumes:
-      - /home/davek/cloudflared:/etc/.cloudflared
     restart: unless-stopped
     command: tunnel run
     environment:
       - TUNNEL_TOKEN=${TUNNEL_TOKEN}
-      - TUNNEL_ORIGIN_CERT=/etc/.cloudflared/cert.pem
+      - TUNNEL_ORIGIN_CERT=/home/nonroot/.cloudflared/cert.pem
     networks:
       - directus_ssab
 
