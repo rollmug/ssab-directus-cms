@@ -125,7 +125,7 @@ services:
     container_name: cloudflared
     image: cloudflare/cloudflared:latest
     volumes:
-      - /home/davek/cloudflared:/etc/.cloudflared
+      - ${CF_CERT_SERVER_DIR}:/etc/.cloudflared
     restart: unless-stopped
     command: tunnel run
     environment:
