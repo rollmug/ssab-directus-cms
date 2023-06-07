@@ -26,18 +26,18 @@ services:
       MYSQL_DATABASE: ${MYSQL_DB}
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASS}
 
-  adminer_ssab:
-    container_name: adminer_ssab
-    image: adminer:latest
-    restart: always
-    depends_on:
-      - mysql_ssab
-    networks: 
-      - directus_ssab
-    environment:
-      ADMINER_DEFAULT_SERVER: mysql_ssab
-    ports:
-      - 8080:8080
+  # adminer_ssab:
+  #   container_name: adminer_ssab
+  #   image: adminer:latest
+  #   restart: always
+  #   depends_on:
+  #     - mysql_ssab
+  #   networks: 
+  #     - directus_ssab
+  #   environment:
+  #     ADMINER_DEFAULT_SERVER: mysql_ssab
+  #   ports:
+  #     - 8080:8080
 
   cache_ssab:
     container_name: cache_ssab
@@ -109,17 +109,17 @@ services:
     networks:
       - directus_ssab
 
-  graphiql_ssab:
-    container_name: graphiql_ssab
-    image: plutoz/graphiql
-    depends_on:
-      - directus_ssab
-    ports:
-      - 4000:4000
-    environment:
-      API_ENDPOINT: ${API_ENDPOINT}
-    networks:
-      - directus_ssab
+  # graphiql_ssab:
+  #   container_name: graphiql_ssab
+  #   image: plutoz/graphiql
+  #   depends_on:
+  #     - directus_ssab
+  #   ports:
+  #     - 4000:4000
+  #   environment:
+  #     API_ENDPOINT: ${API_ENDPOINT}
+  #   networks:
+  #     - directus_ssab
 
   cloudflared:
     container_name: cloudflared
