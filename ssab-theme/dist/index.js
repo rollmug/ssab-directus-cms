@@ -183,6 +183,21 @@ var index = (router, { env }) => {
                               }
                             }
                           }
+
+                          customDecorativeObjects2 {
+                            clientDecorativeObjects2_id {
+                              decorativeObjectImage {
+                                filename_download
+                                filename_disk
+                                id
+                              }
+                              objectPosition {
+                                id
+                                name
+                              }
+                            }
+                          }
+                          
                           customTextures {
                             clientTextures_id {
                               textureImage {
@@ -216,6 +231,7 @@ var index = (router, { env }) => {
       let activeTheme = myTheme.activeTheme;
       let customLightObjects = activeTheme.customLightObjects;
       let customDecorativeObjects = activeTheme.customDecorativeObjects;
+      let customDecorativeObjects2 = activeTheme.customDecorativeObjects2;
       let customTextures = activeTheme.customTextures;
       let uiShapes = activeTheme.uiShapes;
 
@@ -225,6 +241,7 @@ var index = (router, { env }) => {
 
       delete activeTheme.customLightObjects;
       delete activeTheme.customDecorativeObjects;
+      delete activeTheme.customDecorativeObjects2;
       delete activeTheme.customTextures;
       delete activeTheme.uiShapes;
       activeTheme.uiShapes = [];
@@ -267,7 +284,7 @@ var index = (router, { env }) => {
         activeTheme.lightObjects = newLightObjects;
       }
 
-      // decorative objects
+      // decorative objects - LARGE
       if (typeof customDecorativeObjects === 'object' && customDecorativeObjects.length > 0) {
         const newDecorativeObjects = {};
         customDecorativeObjects.forEach(el => {
@@ -277,7 +294,20 @@ var index = (router, { env }) => {
           newDecorativeObjects[id] = `${urlBase}/assets/${obj.decorativeObjectImage.filename_disk}`;
           // activeTheme.decorativeObjects[id] = `${urlBase}/assets/${obj.decorativeObjectImage.filename_disk}`;
         });
-        activeTheme.decorativeObjects = newDecorativeObjects;
+        activeTheme.decorativeObjects[large] = newDecorativeObjects;
+      }
+
+      // decorative objects - SMALL
+      if (typeof customDecorativeObjects2 === 'object' && customDecorativeObjects2.length > 0) {
+        const newDecorativeObjects2 = {};
+        customDecorativeObjects2.forEach(el => {
+          const obj = el.clientDecorativeObjects2_id;
+          // const id = obj.objectPosition.id;
+          const id = 'do' + obj.objectPosition.id;
+          newDecorativeObjects2[id] = `${urlBase}/assets/${obj.decorativeObjectImage.filename_disk}`;
+          // activeTheme.decorativeObjects[id] = `${urlBase}/assets/${obj.decorativeObjectImage.filename_disk}`;
+        });
+        activeTheme.decorativeObjects[small] = newDecorativeObjects2;
       }
 
       // textures
