@@ -26,18 +26,18 @@ services:
       MYSQL_DATABASE: ${MYSQL_DB}
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASS}
 
-  # adminer_ssab:
-  #   container_name: adminer_ssab
-  #   image: adminer:latest
-  #   restart: always
-  #   depends_on:
-  #     - mysql_ssab
-  #   networks: 
-  #     - directus_ssab
-  #   environment:
-  #     ADMINER_DEFAULT_SERVER: mysql_ssab
-  #   ports:
-  #     - 8080:8080
+  adminer_ssab:
+    container_name: adminer_ssab
+    image: adminer:latest
+    restart: always
+    depends_on:
+      - mysql_ssab
+    networks: 
+      - directus_ssab
+    environment:
+      ADMINER_DEFAULT_SERVER: mysql_ssab
+    ports:
+      - 8080:8080
 
   cache_ssab:
     container_name: cache_ssab
@@ -121,18 +121,18 @@ services:
   #   networks:
   #     - directus_ssab
 
-  cloudflared:
-    container_name: cloudflared
-    image: cloudflare/cloudflared:latest
-    volumes:
-      - ${CF_CERT_SERVER_DIR}:/etc/.cloudflared
-    restart: unless-stopped
-    command: tunnel run
-    environment:
-      - TUNNEL_TOKEN=${TUNNEL_TOKEN}
-      - TUNNEL_ORIGIN_CERT=/etc/.cloudflared/cert.pem
-    networks:
-      - directus_ssab
+  # cloudflared:
+  #   container_name: cloudflared
+  #   image: cloudflare/cloudflared:latest
+  #   volumes:
+  #     - ${CF_CERT_SERVER_DIR}:/etc/.cloudflared
+  #   restart: unless-stopped
+  #   command: tunnel run
+  #   environment:
+  #     - TUNNEL_TOKEN=${TUNNEL_TOKEN}
+  #     - TUNNEL_ORIGIN_CERT=/etc/.cloudflared/cert.pem
+  #   networks:
+  #     - directus_ssab
 
 networks:
   directus_ssab:
