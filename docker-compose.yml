@@ -79,8 +79,8 @@ services:
       DB_DATABASE: ${MYSQL_DB}
       DB_PORT: '3306'
 
-      VIRTUAL_HOST: rlmg-dev2.com
-      # VIRTUAL_PORT: 8055
+      VIRTUAL_HOST: ${VIRTUAL_HOST}
+      VIRTUAL_PORT: ${DIRECTUS_PORT}
 
       CACHE_ENABLED: 'true'
       CACHE_STORE: 'redis'
