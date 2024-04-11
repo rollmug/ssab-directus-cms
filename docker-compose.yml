@@ -151,31 +151,6 @@ services:
     networks:
       - directus_ssab
 
-  # graphiql_ssab:
-  #   container_name: graphiql_ssab
-  #   image: plutoz/graphiql
-  #   depends_on:
-  #     - directus_ssab
-  #   ports:
-  #     - 4000:4000
-  #   environment:
-  #     API_ENDPOINT: ${API_ENDPOINT}
-  #   networks:
-  #     - directus_ssab
-
-  # cloudflared:
-  #   container_name: cloudflared
-  #   image: cloudflare/cloudflared:latest
-  #   volumes:
-  #     - ${CF_CERT_SERVER_DIR}:/etc/.cloudflared
-  #   restart: unless-stopped
-  #   command: tunnel run
-  #   environment:
-  #     - TUNNEL_TOKEN=${TUNNEL_TOKEN}
-  #     - TUNNEL_ORIGIN_CERT=/etc/.cloudflared/cert.pem
-  #   networks:
-  #     - directus_ssab
-
 networks:
   directus_ssab:
     driver: bridge
