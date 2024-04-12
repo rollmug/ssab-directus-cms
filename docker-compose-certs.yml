@@ -17,7 +17,7 @@ services:
       - conf:/etc/nginx/conf.d
       - vhost:/etc/nginx/vhost.d
       - html:/usr/share/nginx/html
-      - /etc/ssl/certs:/etc/nginx/certs:ro
+      - ./certs:/etc/nginx/certs:ro
     networks: 
       - directus_ssab
 
