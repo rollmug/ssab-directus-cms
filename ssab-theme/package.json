@@ -10,8 +10,8 @@
 	],
 	"directus:extension": {
 		"type": "endpoint",
-		"path": "dist/index.js",
-		"source": "src/index.js",
+		"path": "dist/index.cjs",
+		"source": "src/index.cjs",
 		"host": "^10.0.0"
 	},
 	"scripts": {
@@ -20,6 +20,6 @@
 		"link": "directus-extension link"
 	},
 	"devDependencies": {
-		"@directus/extensions-sdk": "10.0.0"
+		"@directus/extensions-sdk": "^11.0.4"
 	}
 }
