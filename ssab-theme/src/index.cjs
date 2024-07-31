@@ -1,4 +1,6 @@
-import path from "path"
+'use strict';
+
+import path from "path";
 
 async function asyncForEach(array, callback) {
   for (let index = 0; index < array.length; index++) {
@@ -117,7 +119,7 @@ async function getIMAccessToken(url, env) {
   return data;
 }
 
-export default (router, { env }) => {
+var index = (router, { env }) => {
   router.get('/', async (req, res) => {
     const urlBase = env.PUBLIC_URL;
     let graphURL = new URL("graphql", urlBase);
@@ -181,6 +183,21 @@ export default (router, { env }) => {
                               }
                             }
                           }
+
+                          customDecorativeObjects2 {
+                            clientDecorativeObjects2_id {
+                              decorativeObjectImage {
+                                filename_download
+                                filename_disk
+                                id
+                              }
+                              objectPosition {
+                                id
+                                name
+                              }
+                            }
+                          }
+                          
                           customTextures {
                             clientTextures_id {
                               textureImage {
@@ -214,6 +231,7 @@ export default (router, { env }) => {
       let activeTheme = myTheme.activeTheme;
       let customLightObjects = activeTheme.customLightObjects;
       let customDecorativeObjects = activeTheme.customDecorativeObjects;
+      let customDecorativeObjects2 = activeTheme.customDecorativeObjects2;
       let customTextures = activeTheme.customTextures;
       let uiShapes = activeTheme.uiShapes;
 
@@ -223,6 +241,7 @@ export default (router, { env }) => {
 
       delete activeTheme.customLightObjects;
       delete activeTheme.customDecorativeObjects;
+      delete activeTheme.customDecorativeObjects2;
       delete activeTheme.customTextures;
       delete activeTheme.uiShapes;
       activeTheme.uiShapes = [];
@@ -254,29 +273,50 @@ export default (router, { env }) => {
 
       //light objects
       if (typeof customLightObjects === 'object' && customLightObjects.length > 0) {
+        const newLightObjects = {};
         customLightObjects.forEach(el => {
           const obj = el.clientLightObjects_id;
           const id = obj.objectPlacement.id;
-          activeTheme.lightObjects[id] = `${urlBase}/assets/${obj.lightObjectImage.filename_disk}`;
+          const newID = id.replace("-", "");   
+          newLightObjects[newID] = `${urlBase}/assets/${obj.lightObjectImage.filename_disk}`;
+          // activeTheme.lightObjects[id] = `${urlBase}/assets/${obj.lightObjectImage.filename_disk}`;
         });
+        activeTheme.lightObjects = newLightObjects;
       }
 
-      // decorative objects
+      const newDecorativeObjects = {};
+
+      // decorative objects - LARGE
       if (typeof customDecorativeObjects === 'object' && customDecorativeObjects.length > 0) {
         customDecorativeObjects.forEach(el => {
           const obj = el.clientDecorativeObjects1_id;
-          const id = obj.objectPosition.id;
-          activeTheme.decorativeObjects[id] = `${urlBase}/assets/${obj.decorativeObjectImage.filename_disk}`;
+          const id = 'do' + obj.objectPosition.id;
+          newDecorativeObjects[id] = `${urlBase}/assets/${obj.decorativeObjectImage.filename_disk}`;
         });
       }
 
+      // decorative objects - SMALL
+      if (typeof customDecorativeObjects2 === 'object' && customDecorativeObjects2.length > 0) {
+        customDecorativeObjects2.forEach(el => {
+          const obj = el.clientDecorativeObjects2_id;
+          const id = 'do' + obj.objectPosition.id;
+          newDecorativeObjects[id] = `${urlBase}/assets/${obj.decorativeObjectImage.filename_disk}`;
+        });
+      }
+
+      activeTheme.decorativeObjects = newDecorativeObjects;
+
       // textures
       if (typeof customTextures === 'object' && customTextures.length > 0) {
+        const newCustomTextures = {};
         customTextures.forEach(el => {
           const obj = el.clientTextures_id;
           const id = obj.texturePlacement.id;
-          activeTheme.textures[id] = `${urlBase}/assets/${obj.textureImage.filename_disk}`;
+          const newID = id.replace("-", ""); 
+          newCustomTextures[newID] = `${urlBase}/assets/${obj.textureImage.filename_disk}`;
+          // activeTheme.textures[id] = `${urlBase}/assets/${obj.textureImage.filename_disk}`;
         });
+        activeTheme.textures = newCustomTextures;
       }
 
       // ui shapes
@@ -314,3 +354,5 @@ export default (router, { env }) => {
 
   });
 };
+
+export default index;
